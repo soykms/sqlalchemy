@@ -1,5 +1,5 @@
 # sqlalchemy
-
+```
 conn = pyodbc.connect(
     Trusted_Connection="Yes",
      DRIVER='{ODBC Driver 17 for SQL Server}',
@@ -13,3 +13,4 @@ import pandas as pd
 query = "SELECT * FROM hr_hipo" 
 df = pd.read_sql(query, conn)
 df
+```
