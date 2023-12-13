@@ -17,24 +17,20 @@ df = pd.read_sql(query, conn)
 df
 ```
 
-sqlalchemy-test
+sqlalchemy-sql server
 ```
-from sqlalchemy import create_engine
 
-db_uri = "postgresql+pyodbc://<Your Username>:<Your Password>@<Your PostgreSQL Server>/<Your Database Name>"
-engine = create_engine(db_uri)
 
-# 데이터베이스와의 세션 생성
-from sqlalchemy.orm import sessionmaker
-Session = sessionmaker(bind=engine)
-session = Session()
+import sqlalchemy
 
-# 쿼리 실행
-results = session.execute("SELECT * FROM your_table")
-for row in results:
-    print(row)
+server="LT477007\SQLEXPRESS"
+database="AdventureWorks2019"
+driver="ODBC Driver 17 for SQL Server"
 
-# 세션 종료
-session.close()
+conn_str=f'mssql+pyodbc://{server}/{database}?driver={driver}'
 
+engine = create_engine(conn_str)
+query = "SELECT * FROM [HumanResources].[Department]" 
+df = pd.read_sql(query, engine)
+df
 ```
