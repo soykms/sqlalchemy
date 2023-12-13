@@ -5,7 +5,7 @@ pyodbc-sql server
 conn = pyodbc.connect(
     Trusted_Connection="Yes",
      DRIVER='{ODBC Driver 17 for SQL Server}',
-     SERVER="DESKTOP-CK9O8A7\SQLEXPRESS",
+     SERVER="DESKTOP-NA1010\SQLEXPRESS",
      DATABASE="hr_hipo"
      )
 
@@ -23,7 +23,7 @@ sqlalchemy-sql server
 
 import sqlalchemy
 
-server="LT477007\SQLEXPRESS"
+server="NA1010\SQLEXPRESS"
 database="AdventureWorks2019"
 driver="ODBC Driver 17 for SQL Server"
 
