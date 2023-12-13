@@ -19,8 +19,6 @@ df
 
 sqlalchemy-sql server
 ```
-
-
 import sqlalchemy
 
 server="NA1010\SQLEXPRESS"
