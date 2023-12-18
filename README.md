@@ -230,3 +230,63 @@ with engine.connect() as connection:
 # if_exists='replace'를 사용하면 테이블이 이미 존재할 경우 덮어쓰기, 'append'를 사용하면 데이터 추가 가능
 df.to_sql('your_table_name', engine, if_exists='replace', index=False)
 위 코드에서는 먼저 테이블 스키마를 SQL로 정의하고, 해당 스키마를 데이터베이스에 적용합니다. 그런 다음 데이터프레임을 해당 테이블에 업로드합니다. 테이블이 이미 존재하는 경우 스키마 정의 부분을 생략하고 데이터프레임을 if_exists='append'로 업로드하여 데이터를 추가할 수 있습니다.
+
+
+
+
+# 파일 목록 정의
+file_list = [r'C:\Users\mkim27\Documents\Works\EPM_BI\PMA_WAVE_HELPER\rawdata\LHM\LHM_heatmap\lhm_2023_5678.xlsx', 
+             r'C:\Users\mkim27\Documents\Works\EPM_BI\PMA_WAVE_HELPER\rawdata\LHM\LHM_heatmap\lhm_2023_1234.xlsx',
+             r'C:\Users\mkim27\Documents\Works\EPM_BI\PMA_WAVE_HELPER\rawdata\LHM\LHM_heatmap\lhm_2022_9101112.xlsx', 
+             r'C:\Users\mkim27\Documents\Works\EPM_BI\PMA_WAVE_HELPER\rawdata\LHM\LHM_heatmap\lhm_2022_5678.xlsx', 
+             r'C:\Users\mkim27\Documents\Works\EPM_BI\PMA_WAVE_HELPER\rawdata\LHM\LHM_heatmap\lhm_2022_1234.xlsx',
+             r'C:\Users\mkim27\Documents\Works\EPM_BI\PMA_WAVE_HELPER\rawdata\LHM\LHM_heatmap\lhm_2021_101112.xlsx', 
+             r'C:\Users\mkim27\Documents\Works\EPM_BI\PMA_WAVE_HELPER\rawdata\LHM\LHM_heatmap\lhm_2021_789.xlsx', 
+             r'C:\Users\mkim27\Documents\Works\EPM_BI\PMA_WAVE_HELPER\rawdata\LHM\LHM_heatmap\lhm_2021_456.xlsx',
+             r'C:\Users\mkim27\Documents\Works\EPM_BI\PMA_WAVE_HELPER\rawdata\LHM\LHM_heatmap\lhm_2021_123.xlsx']
+
+
+# 빈 데이터프레임 생성
+result_df = pd.DataFrame()
+
+for file in file_list:
+    df = pd.read_csv(file)
+    df = df.assign(file_name=file)
+    result_df = pd.concat([result_df, df], ignore_index=True)
+
+result_df
+
+
+
+---------------------------------------------------------------------------
+UnicodeDecodeError                        Traceback (most recent call last)
+~\AppData\Local\Temp\ipykernel_26920\2250919716.py in <module>
+     15 
+     16 for file in file_list:
+---> 17     df = pd.read_csv(file)
+     18     df = df.assign(file_name=file)
+     19     result_df = pd.concat([result_df, df], ignore_index=True)
+
+c:\Users\mkim27\Anaconda3\lib\site-packages\pandas\util\_decorators.py in wrapper(*args, **kwargs)
+    309                     stacklevel=stacklevel,
+    310                 )
+--> 311             return func(*args, **kwargs)
+    312 
+    313         return wrapper
+
+c:\Users\mkim27\Anaconda3\lib\site-packages\pandas\io\parsers\readers.py in read_csv(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, squeeze, prefix, mangle_dupe_cols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, error_bad_lines, warn_bad_lines, on_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options)
+    676     kwds.update(kwds_defaults)
+    677 
+--> 678     return _read(filepath_or_buffer, kwds)
+    679 
+    680 
+
+c:\Users\mkim27\Anaconda3\lib\site-packages\pandas\io\parsers\readers.py in _read(filepath_or_buffer, kwds)
+    573 
+...
+c:\Users\mkim27\Anaconda3\lib\site-packages\pandas\_libs\parsers.pyx in pandas._libs.parsers.TextReader._tokenize_rows()
+
+c:\Users\mkim27\Anaconda3\lib\site-packages\pandas\_libs\parsers.pyx in pandas._libs.parsers.raise_parser_error()
+
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xa2 in position 14: invalid start byte
+Output is truncated. View as a scrollable element or open in a text editor. Adjust cell output settings...
